@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Global Solution - Matemática</title>
+  <link rel="stylesheet" href="estilo.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@4.1.1/dist/chartjs-plugin-annotation.min.js"></script>
+</head>
+<body>
+
+  <div class="grupo-nomes">
+    <strong>Grupo:</strong><br>
+    Vinicius Alexandre Aureliano Ribeiro (RM561606)<br>
+    Diego Leite Asprino (RM561662)
+  </div>
+
+  <h2>Global Solution - Matemática</h2>
+
+  <div class="memorial">
+    <h3>Introdução</h3>
+    <p>
+      Este memorial apresenta o desenvolvimento de um modelo matemático para monitoramento do nível do rio em Blumenau (SC), cidade historicamente afetada por enchentes. O objetivo é prever situações de risco e auxiliar no alerta preventivo à população.
+    </p>
+
+    <h3>1. Coleta e Organização dos Dados</h3>
+    <p>
+      Foram simulados os níveis do rio ao longo de 10 dias consecutivos de chuva:
+    </p>
+    <table border="1" cellpadding="4" style="border-collapse:collapse; margin-bottom:16px;">
+      <tr>
+        <th>Dia</th>
+        <th>Nível Real (m)</th>
+      </tr>
+      <tr><td>1</td><td>0.8</td></tr>
+      <tr><td>2</td><td>1.1</td></tr>
+      <tr><td>3</td><td>1.4</td></tr>
+      <tr><td>4</td><td>1.7</td></tr>
+      <tr><td>5</td><td>2.0</td></tr>
+      <tr><td>6</td><td>2.3</td></tr>
+      <tr><td>7</td><td>2.6</td></tr>
+      <tr><td>8</td><td>2.8</td></tr>
+      <tr><td>9</td><td>2.9</td></tr>
+      <tr><td>10</td><td>3.0</td></tr>
+    </table>
+
+    <h3>2. Modelagem Matemática</h3>
+    <p>
+      Para representar o comportamento do nível do rio, foi ajustada uma função polinomial de grau 2 aos dados:
+    </p>
+    <p class="formula">
+      <b>Função modelo:</b> <code>f(d) = 0.025·d² + 0.45·d + 0.3</code>
+    </p>
+    <ul>
+      <li><b>Domínio:</b> 1 ≤ d ≤ 10</li>
+      <li><b>Imagem:</b> Níveis do rio de 0.8m a 3.0m</li>
+    </ul>
+
+    <h3>3. Análise dos Resultados</h3>
+    <ul>
+      <li><b>Nível máximo registrado:</b> 3.0 metros (Dia 10)</li>
+      <li><b>Limite de risco:</b> 2 metros</li>
+      <li><b>Dias de risco de enchente (&gt;2m):</b> 6, 7, 8, 9, 10</li>
+    </ul>
+
+    <h4>Tabela Comparativa: Dados Reais x Modelo</h4>
+    <table border="1" cellpadding="4" style="border-collapse:collapse;">
+      <tr>
+        <th>Dia</th>
+        <th>Nível Real (m)</th>
+        <th>Nível Modelo (m)</th>
+        <th>Risco de Enchente?</th>
+      </tr>
+      <tbody id="tabela-dados"></tbody>
+    </table>
+
+    <h3>4. Interpretação e Aplicação</h3>
+    <p>
+      O modelo matemático permite prever o comportamento do rio e identificar rapidamente os dias em que o nível ultrapassa o limite de risco de 2 metros. Isso possibilita a emissão de alertas automáticos para a Defesa Civil e a população, contribuindo para a prevenção de danos causados por enchentes.
+    </p>
+    <p>
+      A visualização gráfica abaixo destaca os dias de risco, facilitando a análise e a tomada de decisão.
+    </p>
+
+    <h3>Como chegamos à função do modelo</h3>
+    <p>
+      Para encontrar uma função matemática que representasse o comportamento do nível do rio ao longo dos dias, seguimos os seguintes passos:
+    </p>
+    <ol>
+      <li>
+        <b>Coleta dos dados:</b> Registramos os níveis reais do rio durante 10 dias consecutivos de chuva, conforme apresentado na tabela acima.
+      </li>
+      <li>
+        <b>Análise do comportamento:</b> Observamos que o aumento do nível do rio não era constante, sugerindo uma relação não linear entre os dias e os níveis.
+      </li>
+      <li>
+        <b>Escolha do tipo de função:</b> Optamos por ajustar um <b>polinômio de grau 2</b> (função quadrática), pois esse tipo de função é adequado para modelar crescimentos que aceleram ou desaceleram ao longo do tempo.
+      </li>
+      <li>
+        <b>Ajuste dos coeficientes:</b> Utilizamos métodos de ajuste (como regressão polinomial ou ferramentas de planilha eletrônica) para encontrar os coeficientes que melhor aproximassem os dados reais. Assim, chegamos à função:
+        <br>
+        <code>f(d) = 0.025·d² + 0.45·d + 0.3</code>
+        <br>
+        onde <b>d</b> representa o número do dia.
+      </li>
+      <li>
+        <b>Validação:</b> Comparamos os valores previstos pela função com os dados reais para garantir que o modelo representava bem a situação observada.
+      </li>
+    </ol>
+    <p>
+      Dessa forma, a função polinomial encontrada permite prever o nível do rio em dias futuros de chuva contínua, auxiliando na tomada de decisões preventivas.
+    </p>
+  </div>
+
+  <div class="grafico">
+    <canvas id="graficoRio" width="600" height="350"></canvas>
+  </div>
+  <p class="legenda">
+    Legenda: <span style="color:blue;">●</span> dado real,
+    <span style="color:green;">●</span> modelo,
+    <span class="risco">●</span> risco de enchente (&gt;2m)
+  </p>
+
+  <script src="script.js"></script>
+
+  <footer class="footer">
+    <div>
+      Projeto acadêmico - Monitoramento do Nível do Rio | Global Matemática &copy; 2025<br>
+      Desenvolvido por Vinicius Alexandre Aureliano Ribeiro e Diego Leite Asprino
+    </div>
+  </footer>
+</body>
+</html>
